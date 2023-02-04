@@ -1,5 +1,7 @@
 package com.example.algorithm.linked_list;
 
+import org.junit.platform.engine.support.hierarchical.Node;
+
 public class SingleLinkedList<T> {
 
     CustomNode<T> head = null;
@@ -58,6 +60,27 @@ public class SingleLinkedList<T> {
             CustomNode<T> nextNode = searchNode.next;
             searchNode.next = new CustomNode<T>(data);
             searchNode.next.next = nextNode;
+        }
+    }
+
+    public boolean delNode(T isData) {
+        if(this.head == null) {
+            return false;
+        } else {
+            CustomNode<T> node = this.head;
+            if(node.data == isData) {
+                this.head = this.head.next;
+                return true;
+            } else {
+                while (node.next != null) {
+                    if(node.next.data == isData) {
+                        node.next = node.next.next;
+                        return true;
+                    }
+                    node = node.next;
+                }
+                return false;
+            }
         }
     }
 }

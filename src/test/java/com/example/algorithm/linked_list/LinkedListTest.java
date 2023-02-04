@@ -64,6 +64,18 @@ class LinkedListTest {
         );
     }
 
+    private static Stream<Arguments> delNodeMultiValue() {
+        return Stream.of(
+                Arguments.of(List.of(1,2,3,4,5), 3)
+        );
+    }
+
+    private static Stream<Arguments> delHeadNodeMultiValue() {
+        return Stream.of(
+                Arguments.of(List.of(1,2,3,4,5), 1)
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("addNodeMultiValue")
     void linkedListAddNode(List<Integer> list, int n1, int n2) {
@@ -71,9 +83,29 @@ class LinkedListTest {
         for (Integer item : list) {
             ll.addNode(item);
         }
-
         ll.addNodeInside(n2, n1);
+        ll.printAll();
+    }
 
+    @ParameterizedTest
+    @MethodSource("delNodeMultiValue")
+    void linkedListDeleteNode(List<Integer> list, int n1) {
+        SingleLinkedList<Integer> ll = new SingleLinkedList<>();
+        for (Integer item : list) {
+            ll.addNode(item);
+        }
+        ll.delNode(n1);
+        ll.printAll();
+    }
+
+    @ParameterizedTest
+    @MethodSource("delHeadNodeMultiValue")
+    void linkedListDeleteHeadNode(List<Integer> list, int n1) {
+        SingleLinkedList<Integer> ll = new SingleLinkedList<>();
+        for (Integer item : list) {
+            ll.addNode(item);
+        }
+        ll.delNode(n1);
         ll.printAll();
     }
 
