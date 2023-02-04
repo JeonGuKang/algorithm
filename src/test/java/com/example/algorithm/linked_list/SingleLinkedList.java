@@ -34,4 +34,30 @@ public class SingleLinkedList<T> {
             System.out.println(node.data);
         }
     }
+
+    public CustomNode<T> search(T data) {
+        if (this.head != null) {
+            CustomNode<T> node = this.head;
+            while (node != null) {
+                if (node.data == data) {
+                    return node;
+                } else {
+                    node = node.next;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void addNodeInside(T data, T isData) {
+        CustomNode<T> searchNode = this.search(isData);
+
+        if(searchNode == null) {
+            this.addNode(data);
+        } else {
+            CustomNode<T> nextNode = searchNode.next;
+            searchNode.next = new CustomNode<T>(data);
+            searchNode.next.next = nextNode;
+        }
+    }
 }

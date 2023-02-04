@@ -1,12 +1,8 @@
 package com.example.algorithm.linked_list;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -60,6 +56,25 @@ class LinkedListTest {
     private static Stream<Arguments> testMultiValue() {
         return Stream.of(
                 Arguments.of(List.of(1, 2, 3, 4), 1, 2, 3));
+    }
+
+    private static Stream<Arguments> addNodeMultiValue() {
+        return Stream.of(
+                Arguments.of(List.of(1,2,3,4,5), 3, 10)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("addNodeMultiValue")
+    void linkedListAddNode(List<Integer> list, int n1, int n2) {
+        SingleLinkedList<Integer> ll = new SingleLinkedList<>();
+        for (Integer item : list) {
+            ll.addNode(item);
+        }
+
+        ll.addNodeInside(n2, n1);
+
+        ll.printAll();
     }
 
 }
