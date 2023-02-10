@@ -1,6 +1,4 @@
-package com.example.algorithm.linked_list;
-
-import org.junit.platform.engine.support.hierarchical.Node;
+package com.example.algorithm;
 
 public class SingleLinkedList<T> {
 

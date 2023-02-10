@@ -1,6 +1,5 @@
 package com.example.algorithm;
 
-import com.example.algorithm.linked_list.SingleLinkedList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
