@@ -2,6 +2,7 @@ package com.example.algorithm;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -72,6 +73,56 @@ class AlgorithmApplicationTests {
         } else {
             return count;
         }
+    }
+
+
+    @Test
+    void 서울에서김서방찾기() {
+        String[] seoul = {"Jane", "Kim"};
+        int index = Arrays.stream(seoul).collect(Collectors.toList()).indexOf("Kim");
+        System.out.println();
+    }
+
+    @Test
+    int[] 나누어떨어지는숫자배열(int[] arr, int divisor) {
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i : arr) {
+            if(i % divisor == 0) {
+                result.add(i);
+            }
+        }
+        if(result.size() == 0) return new int[]{-1};
+        result.sort(Integer::compareTo);
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    @Test
+    String 핸드폰번호가리기(String phone_number) {
+        return "*".repeat(phone_number.length() - 4) + phone_number.substring(phone_number.length() - 4);
+    }
+
+    @Test
+    void 시소짝궁() {
+        int[] weights = {100,180,360,100,270};
+        int result = 0;
+        for(int i = 0; i < weights.length -2; i++) {
+            for(int j = 1; j < weights.length -1; j++) {
+                int gcd = getGCD(weights[i], weights[j]);
+                int lcm = (weights[i] * weights[j]) / gcd;
+                int minValue = Math.min(weights[i], weights[j]);
+                if((minValue * 4) >= lcm) {
+                    System.out.println(lcm);
+                    result++;
+                }
+            }
+        }
+    }
+
+    public static int getGCD(int num1, int num2) {
+        if (num1 % num2 == 0) {
+            return num2;
+        }
+        return getGCD(num2, num1%num2);
     }
 
 }
