@@ -1,6 +1,7 @@
 package com.example.algorithm.linked_list
 
 import com.example.algorithm.DoubleLinkedList
+import com.example.algorithm.hash.MyHash
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -13,16 +14,14 @@ class MyHashTest {
 
     @ParameterizedTest
     @MethodSource("testValue1")
-    fun linklistSingle(list: List<Int>) {
-        val ll = DoubleLinkedList<Int>()
-        for (item in list) {
-            ll.addNode(item)
-        }
-        ll.printAll()
-        DriverManager.println("searchFromHead = " + ll.searchFromHead(3))
-        DriverManager.println("searchFromTail = " + ll.searchFromTail(2))
-        ll.insertToFront(3, 10)
-        ll.printAll()
+    fun hashTest(list: List<Int>) {
+        val myHash = MyHash(20)
+        myHash.saveData("JeonGu", "01011111111")
+        myHash.saveData("Gugu", "0102222222")
+        myHash.saveData("kaka", "01033333333")
+
+        print("myHash.getData(\"JeonGu\") = ${myHash.getData("JeonGu")}")
+
     }
 
     companion object {
