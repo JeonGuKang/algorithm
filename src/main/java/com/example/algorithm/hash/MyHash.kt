@@ -1,5 +1,8 @@
 package com.example.algorithm.hash
 
+/**
+ * 개방 체이닝 기법
+ */
 class MyHash(size: Int) {
 
     private var hashTable : Array<Slot?>
