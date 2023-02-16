@@ -17,10 +17,11 @@ class MyHashTest {
     fun hashTest(list: List<Int>) {
         val myHash = MyHash(20)
         myHash.saveData("JeonGu", "01011111111")
+        myHash.saveData("JeonGu2", "0109999999")
         myHash.saveData("Gugu", "0102222222")
         myHash.saveData("kaka", "01033333333")
 
-        print("myHash.getData(\"JeonGu\") = ${myHash.getData("JeonGu")}")
+        print("myHash.getData(\"JeonGu2\") = ${myHash.getData("JeonGu2")}")
 
     }
 

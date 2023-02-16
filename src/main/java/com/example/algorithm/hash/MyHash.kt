@@ -9,7 +9,9 @@ class MyHash(size: Int) {
     }
 
     data class Slot(
-        var value: String
+        var key: String,
+        var value: String,
+        var next: Slot? = null
     )
 
     private fun hashFunc(key:String) : Int {
@@ -19,9 +21,20 @@ class MyHash(size: Int) {
     fun saveData(key: String, value: String) : Boolean {
         val address = hashFunc(key)
         hashTable[address]?.let {
-            hashTable[address]?.value = value
+            var findSlot : Slot? = it
+            var prevSlot = it
+            while (findSlot != null) {
+                if(findSlot.key == key) {
+                    findSlot.value = value
+                    return@let
+                } else {
+                    prevSlot = findSlot
+                    findSlot = findSlot.next
+                }
+            }
+            prevSlot.next = Slot(key, value)
         } ?: let {
-            hashTable[address] = Slot(value)
+            hashTable[address] = Slot(key, value)
         }
         return true
     }
@@ -29,7 +42,15 @@ class MyHash(size: Int) {
     fun getData(key: String) : String? {
         val address = hashFunc(key)
         hashTable[address]?.let {
-            return it.value
+            var findSlot: Slot? = it
+            while (findSlot != null) {
+                if(findSlot.key == key) {
+                    return findSlot.value
+                } else {
+                    findSlot = findSlot.next
+                }
+            }
+            return null
         } ?: return null
     }
 
