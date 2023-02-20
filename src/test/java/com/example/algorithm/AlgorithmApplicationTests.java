@@ -125,4 +125,82 @@ class AlgorithmApplicationTests {
         return getGCD(num2, num1%num2);
     }
 
+    @Test
+    void 시저암호() {
+        String s = "a B z";
+        int n = 4;
+        final char[] charArray = s.toCharArray();
+        StringBuilder stringBuilder = new StringBuilder();
+        String answer = "";
+        for(char item : charArray) {
+            if(item == ' ') {
+                stringBuilder.append(" ");
+            } else {
+                int charToInt = (int)item;
+                if(Character.isLowerCase(item)) {
+                    System.out.println((char) ((charToInt - 'a' + 26 + n) % 26 + 'a'));
+                    stringBuilder.append((char) ((charToInt - 'a' + 26 + n) % 26 + 'a'));
+                } else {
+                    stringBuilder.append((char) ((charToInt - 'A' + 26 + n) % 26 + 'A'));
+                }
+            }
+        }
+        answer = stringBuilder.toString();
+    }
+
+    //https://school.programmers.co.kr/learn/courses/30/lessons/131705
+    @Test
+    void 삼총사() {
+        int[] arr = {-2, 3, 0, 2, -5};
+        int n = arr.length;
+        int r = 3;
+        // 크기가 5인 수열 arr에서 r인 3r개를 뽑은 경우를 출력한다.
+        int[] combArr = new int[n]; // 뽑은 원소의 인덱스를 저장하는 배열
+        doCombination(combArr, n, r, 0, 0, arr);
+        System.out.println("sumResult = " + sumResult);
+    }
+    int sumResult = 0;
+    public void doCombination(int[] combArr, int n, int r, int index, int target, int[] arr) {
+        if(r == 0) {
+            // 다 뽑았을 때
+            int sum = 0;
+            for(int i=0; i<index; i++) {
+                sum += arr[combArr[i]];
+            }
+            if(sum == 0) {
+                sumResult++;
+            }
+        } else if (target == n) {
+            //r개를 다 못뽑았는데 arr의 모든 원소를 다 검사했을 때, 실패 -> 아무것도 안하고 끝난다.
+            return;
+        } else {
+            combArr[index] = target;
+            doCombination(combArr, n, r-1, index+1, target+1, arr); // (i) 원소를 뽑는 경우
+            doCombination(combArr, n, r, index, target+1, arr); // (ii) 원소를 안뽑는 경우
+        }
+    }
+
+
+
+    @Test
+    void 최소직사각형() {
+        int[][] arr = {{60, 50}, {30, 70}, {60, 30}, {80, 40}};
+        int maxWidth = 0;
+        int maxHeight = 0;
+        for (int[] ints : arr) {
+           if(ints[1] > ints[0]) {
+               int temp = ints[0];
+               ints[0] = ints[1];
+               ints[1] = temp;
+           }
+           if(ints[0] >= maxWidth) {
+               maxWidth = ints[0];
+           }
+            if(ints[1] >= maxHeight) {
+                maxHeight = ints[1];
+            }
+        }
+
+        System.out.println("result = " + (maxWidth * maxHeight));
+    }
 }
