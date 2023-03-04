@@ -64,7 +64,74 @@ public class NodeMgmt {
         }
     }
 
-    public boolean removeNode(int data) {
-        return false;
+    public boolean delete(int value) {
+        boolean searched = false;
+
+        TNode currParentNode = this.head;
+        TNode currNode = this.head;
+
+        ///코너 케이스 1: Node가 하나도 없을떄
+        if(this.head == null) {
+            return false;
+        } else {
+            ///코너 케이스2 : Node 가 단지 하나만 있고, 해당 Node가 삭제할 Node 일때
+            if(this.head.value == value && this.head.left == null && this.head.right == null) {
+                this.head = null;
+                return true;
+            }
+
+            while (currNode != null) {
+                if(currNode.value == value) {
+                    searched = true;
+                    break;
+                } else if(value < currNode.value) {
+                    currParentNode = currNode;
+                    currNode = currNode.left;
+                } else {
+                    currParentNode = currNode;
+                    currNode = currNode.right;
+                }
+            }
+
+            if(searched == false) {
+                return false;
+            }
+
+            //삭제할 Node가 Leaf Node 인경우
+            if(currNode.left == null && currNode.right == null) {
+                if(value < currParentNode.value) {
+                    currParentNode.left = null;
+                    currNode = null;
+                } else {
+                    currParentNode.right = null;
+                    currNode = null;
+                }
+                return true;
+            } else if(currNode.left != null && currNode.right == null) { // Case 2-1삭제할 Node가 Child Node를 한개 가지고 있을경우 (왼쪽)
+                if(value < currParentNode.value) {
+                    currParentNode.left = currNode.left;
+                    currNode = null;
+                } else {
+                    currParentNode.right = currNode.left;
+                    currNode = null;
+                }
+                return true;
+            } else if(currNode.left == null && currNode.right != null) {// Case 2-2삭제할 Node가 Child Node를 한개 가지고 있을경우 (오른쪽)
+                if(value < currParentNode.value) {
+                    currParentNode.left = currNode.right;
+                    currNode = null;
+                } else {
+                    currParentNode.right = currNode.right;
+                    currNode = null;
+                }
+                return true;
+            }
+        }
+
+        ///여기까지 실행되면,
+        //currNode에는 해당 데이터를 가지고 있는 Node;
+        //currParentNodel 에는 해당 데이터를 가지고 있는 Node 의 부모 Node
     }
+
+
 }
