@@ -16,7 +16,7 @@ class NodeMgmtTest {
             nodeMgmt.insertNode(item)
         }
         print(" before= ${nodeMgmt.search(3).value}")
-        print(" = ${nodeMgmt.removeNode(3)}")
+//        print(" = ${nodeMgmt.removeNode(3)}")
         print(" after = ${nodeMgmt.search(3).value}")
     }
 

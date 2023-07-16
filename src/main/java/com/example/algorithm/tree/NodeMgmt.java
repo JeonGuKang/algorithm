@@ -127,7 +127,7 @@ public class NodeMgmt {
                 return true;
             }
         }
-
+        return true;
         ///여기까지 실행되면,
         //currNode에는 해당 데이터를 가지고 있는 Node;
         //currParentNodel 에는 해당 데이터를 가지고 있는 Node 의 부모 Node
